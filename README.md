@@ -51,7 +51,7 @@ namespace Delegates
 
             s.Register(new Del(o1.Do));
             s.Register(new Del(o2.Do));
-            s.Register(new Del(ObsB.See));//( is calling by name class, because method is static )
+            s.Register(new Del(ObsB.See));//( is calling by name class, because the method is static )
 
             s.OOPS(); 
             Console.ReadKey();
