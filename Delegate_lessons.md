@@ -48,3 +48,86 @@ public class testTestDelegate
 }
 ```
 The following example simplifies this code by instantiating the Action delegate instead of explicitly defining a new delegate and assigning a named method to it.
+
+```C#
+using System;
+using System.Windows.Forms;
+
+public class Name
+{
+   private string instanceName;
+
+   public Name(string name)
+   {
+      this.instanceName = name;
+   }
+
+   public void DisplayToConsole()
+   {
+      Console.WriteLine(this.instanceName);
+   }
+
+   public void DisplayToWindow()
+   {
+      MessageBox.Show(this.instanceName);
+   }
+}
+
+public class testTestDelegate
+{
+   public static void Main()
+   {
+      Name testName = new Name("Koani");
+      Action showMethod = testName.DisplayToWindow;
+      showMethod();
+   }
+}
+```
+
+### [Action`<T>` Delegate](https://msdn.microsoft.com/en-us/library/018hxwa8(v=vs.110).aspx)
+
+
+Encapsulates a method that has a single parameter and does not return a value.
+
+```c#
+public delegate void Action<in T>(
+	T obj
+)
+```
+
+#### Parameters
+obj
+Type: T
+The parameter of the method that this delegate encapsulates.
+Type Parameters
+in T
+The type of the parameter of the method that this delegate encapsulates.
+
+
+When you use the Action `<T>` delegate, you do not have to explicitly define a delegate that encapsulates a method with a single parameter. For example, the following code explicitly declares a delegate named DisplayMessage and assigns a reference to either the WriteLine method or the ShowWindowsMessage method to its delegate instance.
+```C#
+using System;
+using System.Windows.Forms;
+
+delegate void DisplayMessage(string message);
+
+public class TestCustomDelegate
+{
+   public static void Main()
+   {
+      DisplayMessage messageTarget; 
+
+      if (Environment.GetCommandLineArgs().Length > 1)
+         messageTarget = ShowWindowsMessage;
+      else
+         messageTarget = Console.WriteLine;
+
+      messageTarget("Hello, World!");   
+   }      
+
+   private static void ShowWindowsMessage(string message)
+   {
+      MessageBox.Show(message);      
+   }
+}
+```
